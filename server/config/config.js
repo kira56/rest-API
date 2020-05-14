@@ -18,7 +18,7 @@ process.env.SEED = process.env.SEED || 'este-es-el-seed-production';
 // SEEd de authentication
 // ===============================
 // 60 segundas - 60 minutos
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30
+process.env.CADUCIDAD_TOKEN = '48h';
 
 // ===============================
 // Base de Datos
