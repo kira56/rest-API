@@ -25,13 +25,13 @@ module.exports.verificaToken = (req, res, next) => {
 module.exports.verificaAdmin_Role = (req, res, next) => {
     let usuario = req.usuario;
 
-    if(usuario.role === "ADMIN_ROLE"){
+    if (usuario.role === "ADMIN_ROLE") {
         next()
-    }else{
+    } else {
         return res.json({
-            ok:false,
-            err:{
-                message:'El Usuario no es administrador'
+            ok: false,
+            err: {
+                message: 'El Usuario no es administrador'
             }
         })
     }
@@ -46,9 +46,27 @@ module.exports.verificaAdmin_Role = (req, res, next) => {
     // }
     // req.usuario = usuario;
     // next();
-
-
 }
 
+// ===============================
+// Verificar Token URL
+// ===============================
 
+module.exports.verificaTokenImg = (req, res, next) => {
+
+    let token = req.query.token
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({
+                ok: false,
+                err: {
+                    message: 'Token no valido'
+                }
+            })
+        }
+        req.usuario = decoded;
+        next();
+    })
+
+}
 
